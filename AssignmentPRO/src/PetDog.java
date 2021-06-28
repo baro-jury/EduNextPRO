@@ -1,4 +1,3 @@
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -32,7 +31,6 @@ public class PetDog implements IPet<PetDogData> {
         });
     }
 
-    @Override
     public void addPet() {
         Scanner sc = new Scanner(System.in);
         String id, petName;
@@ -56,15 +54,23 @@ public class PetDog implements IPet<PetDogData> {
         _list.add(petdog);
     }
 
-    @Override
-    public void removePet(String id) {
+    public void removePet() {
+        String id;
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter ID: ");
+        id = sc.nextLine();
+        boolean check=false;
         for (PetDogData d : _list) {
             if (d.getID() == Integer.parseInt(id)) {
                 _list.remove(d);
+                check=true;
                 break;
             }
         }
+        if (!check) System.out.println("PetDog already existed!");
+        else System.out.println("Removed");
     }
+    
 
     @Override
     public void saveFile() {
@@ -83,6 +89,16 @@ public class PetDog implements IPet<PetDogData> {
 
     public PetDog() {
         this._list = new ArrayList<>();
+    }
+
+    @Override
+    public void addPet(PetDogData dog) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void removePet(String id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

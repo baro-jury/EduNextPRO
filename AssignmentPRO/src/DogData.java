@@ -1,20 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- *
- * @author MinnminX
- */
 public class DogData {
     private int ID;
     private int PetID;
     private String DogName;
-    private String DogColor;
+    String DogColor;
     private boolean DogGender; //true-cai false-duc
-    private int Price;
+    int Price;
     private String Desc;
 
     @Override
@@ -88,6 +78,4 @@ public class DogData {
     public void setDesc(String Desc) {
         this.Desc = Desc;
     }
-    
-    
 }

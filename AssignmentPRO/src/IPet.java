@@ -1,4 +1,3 @@
-
 public interface IPet<E> {
     public void listAll();
     public void addPet(E dog);

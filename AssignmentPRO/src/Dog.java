@@ -1,4 +1,3 @@
-
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -33,7 +32,6 @@ public class Dog implements IPet<DogData> {
         });
     }
 
-    @Override
     public void addPet() {
         Scanner sc = new Scanner(System.in);
         String id, petID, dogName, dogColor, describe;
@@ -70,14 +68,21 @@ public class Dog implements IPet<DogData> {
         _list.add(dog);
     }
 
-    @Override
-    public void removePet(String id) {
+    public void removePet() {
+        String id;
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter ID: ");
+        id = sc.nextLine();
+        boolean check=false;
         for (DogData d : _list) {
             if (d.getID() == Integer.parseInt(id)) {
                 _list.remove(d);
+                check=true;
                 break;
             }
         }
+        if (!check) System.out.println("Dog already existed!");
+        else System.out.println("Removed");
     }
 
     @Override
@@ -89,8 +94,38 @@ public class Dog implements IPet<DogData> {
         IOFile.writeString("../dog.txt", out_);
         System.out.println("Write completed!");
     }
-
+    
+    public void searchColor(){
+        Scanner sc = new Scanner(System.in);
+        System.out.printf("Entrer the color");
+                    String color;
+                    color= sc.nextLine();
+                    for (DogData u : _list){
+                        if (u.DogColor== color) System.out.println(u.toString());
+                    }
+    }
+    
+    public void searchByPrice(){
+        Scanner sc = new Scanner(System.in);
+        System.out.printf("Entrer the Price: ");
+                    int Pr;
+                    Pr = Integer.parseInt(sc.nextLine());
+                    for (DogData u : _list){
+                        if (u.Price== Pr) System.out.println(u.toString());
+                    }
+    }
+    
     public Dog() {
         this._list = new ArrayList<>();
+    }
+
+    @Override
+    public void addPet(DogData dog) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void removePet(String id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
