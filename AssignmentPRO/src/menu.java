@@ -10,8 +10,8 @@ public class menu{
         Scanner in=new Scanner(System.in);
         while (check) {
             System.out.println("1. TC = 1 - List PetDogs");
-            System.out.println("2. TC = 2 - add new PetDog");
-            System.out.println("3. TC = 3 - remove PetDog by ID");
+            System.out.println("2. TC = 2 - Add new PetDog");
+            System.out.println("3. TC = 3 - Remove PetDog by ID");
             System.out.println("4. TC = 4 - Save PetDogs to petdog.txt file");
             System.out.println("5. TC = 5 - List all Dogs ");
             System.out.println("6. TC = 6 - Add new Dog");
@@ -22,7 +22,7 @@ public class menu{
             System.out.println("11. TC = 11 - Liet ke tat ca cho theo thu tu tang dan cua gia ");
             System.out.println("12. TC = 12 - Tim kiem cho dua tren mau sac");
             System.out.println("13. TC = 13 - Tim kiem cho dua tren gia");
-            System.out.println("14. TC = 13 -   Thoat");
+            System.out.println("0. Thoat");
 
             System.out.print("TC: ");
             int choice;
@@ -36,7 +36,9 @@ public class menu{
                     call.addPet();
                     break;
                 case 3:
-                    call.removePet();
+                    System.out.print("Enter ID: ");
+                    String id = sc.nextLine();
+                    call.removePet(id);
                     break;
                 case 4:
                     call.saveFile();
@@ -48,27 +50,40 @@ public class menu{
                     call1.addPet();
                     break;
                 case 7:
-                    call1.removePet();
+                    System.out.print("Enter ID: ");
+                    id = sc.nextLine();
+                    call1.removePet(id);
+                    break;
+                case 8:
+                    System.out.print("Enter ID: ");
+                    id = sc.nextLine();
+                    call1.updateById(id);
+                    call.updateById(id);
                     break;
                 case 9:
                     call1.saveFile();
                     break;
-                case 8:
-                    //call1.updateById();
-                    break;
                 case 10:
-                    
+                    DogListUtility.ListByName(call1.getList());
                     break;
                 case 11:
-                    
+                    DogListUtility.ListByPrice(call1.getList());
                     break;
                 case 12:
-                    call1.searchColor();
+                    System.out.printf("Enter the color: ");
+                    String color=sc.nextLine();
+                    DogListUtility.FingByColor(call1.getList(), color);
                     break;    
                 case 13:
-                    call1.searchByPrice();
+                    System.out.println("Enter price range");
+                    System.out.print("From: ");
+                    double pr1=Double.parseDouble(sc.nextLine());
+                    System.out.print("To: ");
+                    double pr2=Double.parseDouble(sc.nextLine());
+                    DogListUtility.FingByPrice(call1.getList(), pr1, pr2);
+                    
                     break;
-                case 14: 
+                case 0: 
                     check=false;
                     break;
                 default:

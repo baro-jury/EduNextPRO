@@ -31,18 +31,28 @@ public class PetDog implements IPet<PetDogData> {
         });
     }
 
+    @Override
     public void addPet() {
         Scanner sc = new Scanner(System.in);
         String id, petName;
+        
         System.out.print("Enter ID: ");
         id = sc.nextLine();
-        System.out.print("Enter petname: ");
-        petName = sc.nextLine();
         
-        PetDogData petdog = new PetDogData(Integer.parseInt(id), petName);
+        while (true) {
+            System.out.print("Enter pet name: ");
+            petName = sc.nextLine();
+            if (petName.matches("\\S+")) {
+                break;
+            } else {
+                System.err.println("Enter again");
+            }
+        }
+        
+        PetDogData petdog = new PetDogData(id, petName);
         
         for (PetDogData d : _list) {
-            if (d.getID() == petdog.getID()) {
+            if (d.getID().equalsIgnoreCase(petdog.getID())) {
                 System.out.println("Dog already existed!");
                 return;
             }
@@ -54,14 +64,11 @@ public class PetDog implements IPet<PetDogData> {
         _list.add(petdog);
     }
 
-    public void removePet() {
-        String id;
-        Scanner sc = new Scanner(System.in);
-        System.out.print("Enter ID: ");
-        id = sc.nextLine();
+    @Override
+    public void removePet(String id) {
         boolean check=false;
         for (PetDogData d : _list) {
-            if (d.getID() == Integer.parseInt(id)) {
+            if (d.getID().equalsIgnoreCase(id)) {
                 _list.remove(d);
                 check=true;
                 break;
@@ -78,7 +85,7 @@ public class PetDog implements IPet<PetDogData> {
         for (PetDogData d : _list) {
             out_ += d.toString() + "\n\n";
         }
-        Path file = Paths.get("petdog.txt");
+        Path file = Paths.get("src/petdog.txt");
         try {
             Files.write(file, out_.getBytes());
         } catch (IOException e) {
@@ -90,15 +97,24 @@ public class PetDog implements IPet<PetDogData> {
     public PetDog() {
         this._list = new ArrayList<>();
     }
-
-    @Override
-    public void addPet(PetDogData dog) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void removePet(String id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
     
+    @Override
+    public void updateById(String id) {
+        Scanner sc = new Scanner(System.in);
+        for (int i = 0; i < _list.size(); i++) {
+            if (_list.get(i).getID().equalsIgnoreCase(id)) {
+                _list.remove(i);
+
+                String petName;
+                System.out.print("Enter petname: ");
+                petName = sc.nextLine();
+
+                _list.add(new PetDogData(id, petName));
+                System.out.println("----------------");
+                System.out.println("Update successfully!");
+                System.out.println();
+                break;
+            }
+        }
+    }
 }

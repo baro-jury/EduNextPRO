@@ -4,6 +4,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
@@ -32,31 +33,48 @@ public class Dog implements IPet<DogData> {
         });
     }
 
+    @Override
     public void addPet() {
         Scanner sc = new Scanner(System.in);
         String id, petID, dogName, dogColor, describe;
         boolean dogGender;
-        int price;
+        double price;
         
-        System.out.print("Enter ID: ");
-        id = sc.nextLine();
+        while (true) {
+            System.out.print("Enter ID: ");
+            id = sc.nextLine();
+            if (id.matches("\\d{4}")) {
+                break;
+            } else {
+                System.err.println("Enter again");
+            }
+        }
         System.out.print("Enter pet ID: ");
         petID = sc.nextLine();
         System.out.print("Enter dog name: ");
         dogName = sc.nextLine();
-        System.out.print("Enter dog color: ");
-        dogColor = sc.nextLine();
+        
+        while (true) {
+            System.out.print("Enter dog color: ");
+            dogColor = sc.nextLine();
+            if (dogColor.matches("\\S+")) {
+                break;
+            } else {
+                System.err.println("Enter again");
+            }
+        }
+        
         System.out.print("Enter dog gender (true/false) (true = female) : ");
         dogGender = Boolean.parseBoolean(sc.nextLine());
         System.out.print("Enter price: ");
-        price = Integer.parseInt(sc.nextLine());
+        price = Double.parseDouble(sc.nextLine());
         System.out.print("Enter describe: ");
         describe = sc.nextLine();
         
-        DogData dog = new DogData(Integer.parseInt(id), Integer.parseInt(petID), dogName, dogColor, dogGender, price, describe);
+        DogData dog = new DogData(id, petID, dogName, dogColor, dogGender, price, describe);
         
         for (DogData d : _list) {
-            if (d.getID() == dog.getID()) {
+            if (d.getID().equalsIgnoreCase(dog.getID())) {
                 System.out.println("Dog already existed!");
                 return;
             }
@@ -68,14 +86,11 @@ public class Dog implements IPet<DogData> {
         _list.add(dog);
     }
 
-    public void removePet() {
-        String id;
-        Scanner sc = new Scanner(System.in);
-        System.out.print("Enter ID: ");
-        id = sc.nextLine();
+    @Override
+    public void removePet(String id) {
         boolean check=false;
         for (DogData d : _list) {
-            if (d.getID() == Integer.parseInt(id)) {
+            if (d.getID().equalsIgnoreCase(id)) {
                 _list.remove(d);
                 check=true;
                 break;
@@ -91,41 +106,57 @@ public class Dog implements IPet<DogData> {
         for (DogData d : _list) {
             out_ += d.toString() + "\n\n";
         }
-        IOFile.writeString("../dog.txt", out_);
+        Path file = Paths.get("src/dog.txt");
+        try {
+            Files.write(file, out_.getBytes());
+        } catch (IOException e) {
+            System.out.println(e);
+        }
         System.out.println("Write completed!");
-    }
-    
-    public void searchColor(){
-        Scanner sc = new Scanner(System.in);
-        System.out.printf("Entrer the color");
-                    String color;
-                    color= sc.nextLine();
-                    for (DogData u : _list){
-                        if (u.DogColor== color) System.out.println(u.toString());
-                    }
-    }
-    
-    public void searchByPrice(){
-        Scanner sc = new Scanner(System.in);
-        System.out.printf("Entrer the Price: ");
-                    int Pr;
-                    Pr = Integer.parseInt(sc.nextLine());
-                    for (DogData u : _list){
-                        if (u.Price== Pr) System.out.println(u.toString());
-                    }
     }
     
     public Dog() {
         this._list = new ArrayList<>();
     }
-
+    
     @Override
-    public void addPet(DogData dog) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    public void updateById(String id){
+        Scanner sc = new Scanner(System.in);
+        for (int i = 0; i < _list.size(); i++) {
+            if (_list.get(i).getID().equalsIgnoreCase(id)) {
+                _list.remove(i);
 
-    @Override
-    public void removePet(String id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                String petID, dogName, dogColor, describe;
+                boolean dogGender;
+                double price;
+        
+                System.out.print("Enter pet ID: ");
+                petID = sc.nextLine();
+                System.out.print("Enter dog name: ");
+                dogName = sc.nextLine();
+        
+                while (true) {
+                    System.out.print("Enter dog color: ");
+                    dogColor = sc.nextLine();
+                    if (dogColor.matches("\\S+")) {
+                        break;
+                    } else {
+                        System.err.println("Enter again");
+                    }
+                }
+                System.out.print("Enter dog gender (true/false) (true = female) : ");
+                dogGender = Boolean.parseBoolean(sc.nextLine());
+                System.out.print("Enter price: ");
+                price = Double.parseDouble(sc.nextLine());
+                System.out.print("Enter describe: ");
+                describe = sc.nextLine();
+
+                _list.add(new DogData(id, petID, dogName, dogColor, dogGender, price, describe));
+                System.out.println("----------------");
+                System.out.println("Update successfully!");
+                System.out.println();
+                break;
+            }
+        }
     }
 }
