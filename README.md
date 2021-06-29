@@ -54,8 +54,10 @@ Color can not be blank.
 
 # Bảng phân công
 
-1.	Tạo các lớp thực thể: PetDog, Dog. Tạo Interface cho các chức năng của bài toán
-2.	Tạo lớp đọc ghi file, tìm dữ liệu cho 2 file
-3.	Tạo Lớp cài đặt các chức năng liên quan đến danh sách đối tượng lớp PetDog
-4.	Tạo Lớp cài đặt các chức năng liên quan đến danh sách đối tượng lớp Dog
-5.	Tạo menu + chạy các chức năng của chương trình
+Duy {1.	Tạo các lớp thực thể: PetDog, Dog. Tạo Interface cho các chức năng của bài toán
+     2.	Tạo lớp đọc ghi file, tìm dữ liệu cho 2 file }
+
+Minh {3.	Tạo Lớp cài đặt các chức năng liên quan đến danh sách đối tượng lớp PetDog
+      4.	Tạo Lớp cài đặt các chức năng liên quan đến danh sách đối tượng lớp Dog }
+
+Hiếu {5.	Tạo menu + chạy các chức năng của chương trình }
