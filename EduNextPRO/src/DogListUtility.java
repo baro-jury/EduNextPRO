@@ -44,7 +44,7 @@ public class DogListUtility {
         System.out.println("There's no dog cost " + price);
         return null;
     }
-    public static List<DogData> FingByPrice (List<DogData> list, int FromPrice, int ToPrice) {
+    public static List<DogData> FingByPrice (List<DogData> list, double FromPrice, double ToPrice) {
         List<DogData> out_ = new ArrayList<>();
         for (DogData d : list) {
             if (d.getPrice() <= ToPrice && d.getPrice() >= FromPrice) {

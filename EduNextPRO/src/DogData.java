@@ -1,10 +1,10 @@
 public class DogData {
-    private int ID;
-    private int PetID;
+    private String ID;
+    private String PetID;
     private String DogName;
     String DogColor;
     private boolean DogGender; //true-cai false-duc
-    int Price;
+    double Price;
     private String Desc;
 
     @Override
@@ -13,7 +13,7 @@ public class DogData {
     }
     public DogData() {}
     
-    public DogData(int ID, int PetID, String DogName, String DogColor, boolean DogGender, int Price, String Desc) {
+    public DogData(String ID, String PetID, String DogName, String DogColor, boolean DogGender, double Price, String Desc) {
         this.ID = ID;
         this.PetID = PetID;
         this.DogName = DogName;
@@ -23,19 +23,19 @@ public class DogData {
         this.Desc = Desc;
     }
 
-    public int getID() {
+    public String getID() {
         return ID;
     }
 
-    public void setID(int ID) {
+    public void setID(String ID) {
         this.ID = ID;
     }
 
-    public int getPetID() {
+    public String getPetID() {
         return PetID;
     }
 
-    public void setPetID(int PetID) {
+    public void setPetID(String PetID) {
         this.PetID = PetID;
     }
 
@@ -55,7 +55,7 @@ public class DogData {
         this.DogColor = DogColor;
     }
 
-    public String getDogGender() {
+    public String isDogGender() {
         return DogGender ? "cái" : "đực";
     }
 
@@ -63,11 +63,11 @@ public class DogData {
         this.DogGender = isFemale;
     }
 
-    public int getPrice() {
+    public double getPrice() {
         return Price;
     }
 
-    public void setPrice(int Price) {
+    public void setPrice(double Price) {
         this.Price = Price;
     }
 

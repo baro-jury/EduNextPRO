@@ -1,5 +1,5 @@
 public class PetDogData {
-    public int ID;
+    public String ID;
     public String PetName;
 
     @Override
@@ -7,17 +7,17 @@ public class PetDogData {
         return ID + "; " + PetName;
     }
 
-    public PetDogData(int ID, String PetName) {
+    public PetDogData(String ID, String PetName) {
         this.ID = ID;
         this.PetName = PetName;
     }
     public PetDogData() {}
 
-    public int getID() {
+    public String getID() {
         return ID;
     }
 
-    public void setID(int ID) {
+    public void setID(String ID) {
         this.ID = ID;
     }
 

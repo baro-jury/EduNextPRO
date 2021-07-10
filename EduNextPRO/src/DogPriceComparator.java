@@ -14,7 +14,13 @@ public class DogPriceComparator implements Comparator<DogData> {
 
     @Override
     public int compare(DogData t, DogData t1) {
-        return Integer.compare(t.getPrice(), t1.getPrice());
+        if(t.getPrice() > t1.getPrice()){
+            return 1;
+        }else if(t.getPrice() > t1.getPrice()){
+            return 0;
+        }else{
+            return -1;
+        }
     }
     
 }
